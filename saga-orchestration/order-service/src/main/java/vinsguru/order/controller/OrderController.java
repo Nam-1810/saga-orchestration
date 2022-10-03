@@ -34,10 +34,4 @@ public class OrderController {
 		return this.service.getAll();
 	}
 	
-	@PostMapping("/test")
-	public Mono<PurchaseOrder> getByid(@RequestBody String uuid) {
-		UUID u = UUID.fromString(uuid);
-		return this.service.findAllById(u);
-	}
-	
 }

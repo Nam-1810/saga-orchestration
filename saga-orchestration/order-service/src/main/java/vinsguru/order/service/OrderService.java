@@ -45,21 +45,6 @@ public class OrderService {
                 .doOnNext(e -> this.emitEvent(orderRequestDTO));
     }
     
-    public Mono<PurchaseOrder> findAllById(UUID uuid){
-    	
-        return this.purchaseOrderRepository.findById(getIdAsByte(uuid));
-    }
-    
-    public byte[] getIdAsByte(UUID uuid)
-    {
-        ByteBuffer bb = ByteBuffer.wrap(new byte[16]);
-        bb.putLong(uuid.getMostSignificantBits());
-        bb.putLong(uuid.getLeastSignificantBits());
-        System.out.println("byte: " + bb.array());
-        return bb.array();
-    }
-    
-    
     public Flux<OrderResponseDTO> getAll() {
         return this.purchaseOrderRepository.findAll()
                 .map(this::entityToDto);
